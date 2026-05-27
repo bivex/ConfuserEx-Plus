@@ -101,7 +101,7 @@
     <Compile Include="ControlFlow\SwitchMangler.cs" />
     <Compile Include="AntiDumpProtection.cs" />
     <Compile Include="AntiDebugProtection.cs" />
-    <Compile Include="EreaseHeader.cs" />
+    <Compile Include="EraseHeader.cs" />
     <Compile Include="IntegrityChecker.cs" />
     <Compile Include="InvalidMetadataProtection.cs" />
     <Compile Include="LocaltoFieldProtection.cs" />

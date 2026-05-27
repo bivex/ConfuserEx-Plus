@@ -18,7 +18,7 @@ namespace Confuser.Protections
 
         public override string Description
         {
-            get { return "Adds a marker to prevent ILDasm from disassembling the module."; }
+            get { return "Converts local variables to static fields to complicate analysis."; }
         }
 
         public override string Id
