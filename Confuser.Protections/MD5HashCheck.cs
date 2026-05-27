@@ -91,7 +91,7 @@ namespace Confuser.Protections
             {
                 using (SHA256 sha256 = SHA256.Create())
                 {
-                    byte[] salt = Encoding.ASCII.GetBytes("DarksVM_S@lt_2026_Secure_Hash");
+                    byte[] salt = Encoding.ASCII.GetBytes("NeonVM_S@lt_2026_Secure_Hash");
                     byte[] combined = new byte[hash.Length + salt.Length];
                     System.Buffer.BlockCopy(hash, 0, combined, 0, hash.Length);
                     System.Buffer.BlockCopy(salt, 0, combined, hash.Length, salt.Length);
