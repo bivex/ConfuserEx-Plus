@@ -67,7 +67,7 @@ namespace Confuser.Protections
 
             public override string Name
             {
-                get { return ""; }
+                get { return "Integrity Protection Injection"; }
             }
 
             protected override void Execute(ConfuserContext context, ProtectionParameters parameters)
