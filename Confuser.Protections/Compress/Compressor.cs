@@ -22,19 +22,19 @@ namespace Confuser.Protections
 {
     internal class Compressor : Packer
     {
-        public const string _Id = "压缩打包";
+        public const string _Id = "compressor";
         public const string _FullId = "Ki.Compressor";
         public const string _ServiceId = "Ki.Compressor";
         public static readonly object ContextKey = new object();
 
         public override string Name
         {
-            get { return "压缩打包（Compressor）"; }
+            get { return "Compressor"; }
         }
 
         public override string Description
         {
-            get { return "此功能减小目标文件大小。"; }
+            get { return "Reduces the output file size."; }
         }
 
         public override string Id

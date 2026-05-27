@@ -272,11 +272,11 @@ namespace Confuser.Core
             info.ApplyToMember = true;
 
             var settings = new StringBuilder();
-            if (rule.Preset != ProtectionPreset.无保护)
+            if (rule.Preset != ProtectionPreset.None)
                 settings.AppendFormat("preset({0});", rule.Preset.ToString().ToLowerInvariant());
             foreach (var item in rule)
             {
-                settings.Append(item.Action == SettingItemAction.添加 ? '+' : '-');
+                settings.Append(item.Action == SettingItemAction.Add ? '+' : '-');
                 settings.Append(item.Id);
                 if (item.Count > 0)
                 {

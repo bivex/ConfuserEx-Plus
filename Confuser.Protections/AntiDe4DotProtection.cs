@@ -8,13 +8,13 @@ namespace Confuser.Protections
 {
     public class AntiDe4DotProtection : Protection
     {
-        public override ProtectionPreset Preset => ProtectionPreset.基础保护;
+        public override ProtectionPreset Preset => ProtectionPreset.Basic;
 
-        public override string Name => "反De4Dot保护（Anti De4Dot）";
+        public override string Name => "Anti De4Dot";
 
-        public override string Description => "此保护防止使用De4Dot对代码进行解密。";
+        public override string Description => "Prevents De4Dot from decrypting the code.";
 
-        public override string Id => "反De4Dot保护";
+        public override string Id => "anti de4dot";
 
         public override string FullId => "Confuser.AntiDe4Dot";
 

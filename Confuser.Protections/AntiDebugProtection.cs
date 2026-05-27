@@ -12,17 +12,17 @@ namespace Confuser.Protections
     [BeforeProtection("Ki.ControlFlow")]
     internal class AntiDebugProtection : Protection
     {
-        public const string _Id = "反调试保护";
+        public const string _Id = "anti debug";
         public const string _FullId = "Ki.AntiDebug";
 
         public override string Name
         {
-            get { return "反调试保护（Anti Debug）"; }
+            get { return "Anti Debug"; }
         }
 
         public override string Description
         {
-            get { return "此保护可防止调试器对程序集进行调试或分析。"; }
+            get { return "Prevents debuggers from analyzing the assembly."; }
         }
 
         public override string Id
@@ -37,7 +37,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.基础保护; }
+            get { return ProtectionPreset.Basic; }
         }
 
         protected override void Initialize(ConfuserContext context)

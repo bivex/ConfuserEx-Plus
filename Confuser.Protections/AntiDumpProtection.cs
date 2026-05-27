@@ -12,15 +12,15 @@ namespace Confuser.Protections
 
     internal class AntiDumpProtection : Protection
     {
-        public const string _Id = "反转储保护";
+        public const string _Id = "anti dump";
         public const string _FullId = "Ki.AntiDump";
 
-        public override string Name => "反转储保护（Anti Dump）";
-        public override string Description => "此保护可防止内存中程序数据被转储为文件。";
+        public override string Name => "Anti Dump";
+        public override string Description => "Prevents dumping assembly data from memory.";
         public override string Id => _Id;
         public override string FullId => _FullId;
 
-        public override ProtectionPreset Preset => ProtectionPreset.最强保护;
+        public override ProtectionPreset Preset => ProtectionPreset.Maximum;
 
         protected override void Initialize(ConfuserContext context)
         {

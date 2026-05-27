@@ -17,7 +17,7 @@ namespace ConfuserEx.ViewModel
         int selectedRuleIndex;
 
         public SettingsTabVM(AppVM app)
-            : base(app, "设置")
+            : base(app, "Settings")
         {
             app.PropertyChanged += (sender, e) =>
             {

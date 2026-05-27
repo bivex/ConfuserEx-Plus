@@ -19,7 +19,7 @@ namespace ConfuserEx.ViewModel
         bool? result;
 
         public ProtectTabVM(AppVM app)
-            : base(app, "保护!")
+            : base(app, "Protect!")
         {
             documentContent = new Paragraph();
             LogDocument = new FlowDocument();
@@ -58,7 +58,7 @@ namespace ConfuserEx.ViewModel
             if (parameters.Project.Count == 0)
             {
                 documentContent.Inlines.Clear();
-                AppendLine("[ERROR] {0}", Brushes.Red, "未配置需要保护的程序集！");
+                AppendLine("[ERROR] {0}", Brushes.Red, "No assemblies configured for protection!");
                 return;
             }
 

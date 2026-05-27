@@ -12,17 +12,17 @@ namespace Confuser.Protections
 
     internal class AntiDnSpyProtection : Protection
     {
-        public const string _Id = "反Dnspy保护";
+        public const string _Id = "anti dnspy";
         public const string _FullId = "Ki.AntiDnSpy";
 
         public override string Name
         {
-            get { return "反Dnspy保护（Anti DnSpy）"; }
+            get { return "Anti DnSpy"; }
         }
 
         public override string Description
         {
-            get { return "此保护可防止程序集在使用过DnSpy计算机中运行。"; }
+            get { return "Prevents the assembly from running on machines that used DnSpy."; }
         }
 
         public override string Id
@@ -37,7 +37,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.最强保护; }
+            get { return ProtectionPreset.Maximum; }
         }
 
         protected override void Initialize(ConfuserContext context)

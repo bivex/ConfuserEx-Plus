@@ -15,7 +15,7 @@ namespace Confuser.Protections
     [BeforeProtection("Ki.ControlFlow")]
     internal class ReferenceProxyProtection : Protection, IReferenceProxyService
     {
-        public const string _Id = "引用代理保护";
+        public const string _Id = "ref proxy";
         public const string _FullId = "Ki.RefProxy";
         public const string _ServiceId = "Ki.RefProxy";
 
@@ -24,12 +24,12 @@ namespace Confuser.Protections
 
         public override string Name
         {
-            get { return "引用代理保护（Ref Proxy）"; }
+            get { return "Reference Proxy"; }
         }
 
         public override string Description
         {
-            get { return "此保护对类型/方法/字段的引用进行编码和隐藏。"; }
+            get { return "Encodes and hides references to types/methods/fields."; }
         }
 
         public override string Id
@@ -44,7 +44,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.正常保护; }
+            get { return ProtectionPreset.Normal; }
         }
 
         public void ExcludeMethod(ConfuserContext context, MethodDef method)

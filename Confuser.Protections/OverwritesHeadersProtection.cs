@@ -25,7 +25,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "此保护会重写整个PE头。";
+                return "Overwrites the entire PE header.";
             }
         }
 
@@ -41,7 +41,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "文件头保护";
+                return "headers";
             }
         }
 
@@ -49,7 +49,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "文件头保护（Headers Protection）";
+                return "Headers Protection";
             }
         }
 
@@ -57,7 +57,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return ProtectionPreset.正常保护;
+                return ProtectionPreset.Normal;
             }
         }
 

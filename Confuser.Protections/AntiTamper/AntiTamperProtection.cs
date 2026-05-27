@@ -13,19 +13,19 @@ namespace Confuser.Protections
     [BeforeProtection("Ki.ControlFlow"), AfterProtection("Ki.Constants")]
     internal class AntiTamperProtection : Protection, IAntiTamperService
     {
-        public const string _Id = "反篡改保护";
+        public const string _Id = "anti tamper";
         public const string _FullId = "Ki.AntiTamper";
         public const string _ServiceId = "Ki.AntiTamper";
         static readonly object HandlerKey = new object();
 
         public override string Name
         {
-            get { return "反篡改保护（Anti Tamper）"; }
+            get { return "Anti Tamper"; }
         }
 
         public override string Description
         {
-            get { return "此保护防止应用程序被篡改（容易被当做病毒）。"; }
+            get { return "Prevents tampering with the application (may trigger AV)."; }
         }
 
         public override string Id
@@ -40,7 +40,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.最强保护; }
+            get { return ProtectionPreset.Maximum; }
         }
 
         protected override void Initialize(ConfuserContext context)

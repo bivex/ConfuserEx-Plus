@@ -6,17 +6,17 @@ namespace Confuser.Protections
 {
     internal class AntiILDasmProtection : Protection
     {
-        public const string _Id = "反ILDasm保护";
+        public const string _Id = "anti ildasm";
         public const string _FullId = "Ki.AntiILDasm";
 
         public override string Name
         {
-            get { return "反ILDasm保护（Anti ILDasm）"; }
+            get { return "Anti ILDasm"; }
         }
 
         public override string Description
         {
-            get { return "此保护在模块中添加阻止ILDasm反汇编的标记。"; }
+            get { return "Adds a marker to prevent ILDasm from disassembling the module."; }
         }
 
         public override string Id
@@ -31,7 +31,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.基础保护; }
+            get { return ProtectionPreset.Basic; }
         }
 
         protected override void Initialize(ConfuserContext context)

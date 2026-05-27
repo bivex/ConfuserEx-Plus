@@ -185,12 +185,12 @@ namespace Confuser.Core.Project
         /// <summary>
         ///     Add the protection to the active protections
         /// </summary>
-        添加,
+        Add,
 
         /// <summary>
         ///     Remove the protection from the active protections
         /// </summary>
-        移除
+        Remove
     }
 
     /// <summary>
@@ -204,7 +204,7 @@ namespace Confuser.Core.Project
         /// </summary>
         /// <param name="id">The protection id</param>
         /// <param name="action">The action to take</param>
-        public SettingItem(string id = null, SettingItemAction action = SettingItemAction.添加)
+        public SettingItem(string id = null, SettingItemAction action = SettingItemAction.Add)
         {
             Id = id;
             Action = action;
@@ -236,7 +236,7 @@ namespace Confuser.Core.Project
             idAttr.Value = Id;
             elem.Attributes.Append(idAttr);
 
-            if (Action != SettingItemAction.添加)
+            if (Action != SettingItemAction.Add)
             {
                 XmlAttribute pAttr = xmlDoc.CreateAttribute("action");
                 pAttr.Value = Action.ToString().ToLower();
@@ -271,7 +271,7 @@ namespace Confuser.Core.Project
             if (elem.Attributes["action"] != null)
                 Action = (SettingItemAction)Enum.Parse(typeof(SettingItemAction), elem.Attributes["action"].Value, true);
             else
-                Action = SettingItemAction.添加;
+                Action = SettingItemAction.Add;
 
             Clear();
             foreach (XmlElement i in elem.ChildNodes.OfType<XmlElement>())
@@ -303,7 +303,7 @@ namespace Confuser.Core.Project
         /// <param name="pattern">The pattern</param>
         /// <param name="preset">The preset</param>
         /// <param name="inherit">Inherits protection</param>
-        public Rule(string pattern = "true", ProtectionPreset preset = ProtectionPreset.无保护, bool inherit = false)
+        public Rule(string pattern = "true", ProtectionPreset preset = ProtectionPreset.None, bool inherit = false)
         {
             Pattern = pattern;
             Preset = preset;
@@ -341,7 +341,7 @@ namespace Confuser.Core.Project
             ruleAttr.Value = Pattern;
             elem.Attributes.Append(ruleAttr);
 
-            if (Preset != ProtectionPreset.无保护)
+            if (Preset != ProtectionPreset.None)
             {
                 XmlAttribute pAttr = xmlDoc.CreateAttribute("preset");
                 pAttr.Value = Preset.ToString().ToLower();
@@ -372,7 +372,7 @@ namespace Confuser.Core.Project
             if (elem.Attributes["preset"] != null)
                 Preset = (ProtectionPreset)Enum.Parse(typeof(ProtectionPreset), elem.Attributes["preset"].Value, true);
             else
-                Preset = ProtectionPreset.无保护;
+                Preset = ProtectionPreset.None;
 
             if (elem.Attributes["inherit"] != null)
                 Inherit = bool.Parse(elem.Attributes["inherit"].Value);

@@ -17,17 +17,17 @@ namespace Confuser.Protections
 
     internal class MD5HashCheck : Protection
     {
-        public const string _Id = "MD5验证保护";
+        public const string _Id = "md5 hash check";
         public const string _FullId = "Ki.md5";
         public ModuleWriterListener CurrentListener = new ModuleWriterListener();
         public override string Name
         {
-            get { return "MD5验证保护（MD5 Hash Check）"; }
+            get { return "MD5 Hash Check"; }
         }
 
         public override string Description
         {
-            get { return "此保护通过比对模块MD5值以防止文件修改。"; }
+            get { return "Prevents file modification by comparing module MD5 values."; }
         }
 
         public override string Id
@@ -42,7 +42,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.基础保护; }
+            get { return ProtectionPreset.Basic; }
         }
 
         protected override void Initialize(ConfuserContext context)

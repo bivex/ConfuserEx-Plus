@@ -10,7 +10,7 @@ namespace ConfuserEx.ViewModel
     internal class AboutTabVM : TabViewModel
     {
         public AboutTabVM(AppVM app)
-            : base(app, "关于")
+            : base(app, "About")
         {
             var decoder = new IconBitmapDecoder(new Uri("pack://application:,,,/ConfuserEx.ico"), BitmapCreateOptions.DelayCreation, BitmapCacheOption.OnDemand);
 

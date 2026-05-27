@@ -41,7 +41,7 @@ namespace Confuser.Protections.Compress
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.无保护; }
+            get { return ProtectionPreset.None; }
         }
 
         protected override void Initialize(ConfuserContext context)

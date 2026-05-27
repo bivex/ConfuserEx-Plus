@@ -56,7 +56,7 @@ namespace Confuser.Core
         void FillPreset(ProtectionPreset preset, ProtectionSettings settings)
         {
             foreach (Protection prot in protections.Values)
-                if (prot.Preset != ProtectionPreset.无保护 && prot.Preset <= preset && !settings.ContainsKey(prot))
+                if (prot.Preset != ProtectionPreset.None && prot.Preset <= preset && !settings.ContainsKey(prot))
                     settings.Add(prot, new Dictionary<string, string>());
         }
 
@@ -232,7 +232,7 @@ namespace Confuser.Core
                 FillPreset(i.Key.Preset, ret);
                 foreach (var prot in i.Key)
                 {
-                    if (prot.Action == SettingItemAction.添加)
+                    if (prot.Action == SettingItemAction.Add)
                         ret[protections[prot.Id]] = new Dictionary<string, string>(prot, StringComparer.OrdinalIgnoreCase);
                     else
                         ret.Remove(protections[prot.Id]);

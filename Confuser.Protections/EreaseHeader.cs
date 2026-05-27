@@ -20,25 +20,25 @@ namespace Confuser.Protections
             pipeline.InsertPreStage(PipelineStage.EndModule, new EraseHeadersProtection.ErasePhase(this));
         }
 
-        public override string Description => "此保护覆盖了.cctor。";
+        public override string Description => "Overwrites the .cctor.";
 
         public override string FullId => _FullId;
 
         public override string Id => _Id;
 
-        public override string Name => "删除文件头保护（Erase Headers）";
+        public override string Name => "Erase Headers";
 
         public override ProtectionPreset Preset
         {
             get
             {
-                return ProtectionPreset.正常保护;
+                return ProtectionPreset.Normal;
             }
         }
 
         public const string _FullId = "Ki.EraseHeaders";
 
-        public const string _Id = "删除文件头保护";
+        public const string _Id = "erase headers";
 
         private class ErasePhase : ProtectionPhase
         {

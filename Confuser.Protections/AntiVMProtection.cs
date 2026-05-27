@@ -13,17 +13,17 @@ namespace Confuser.Protections
 
     internal class AntiVMProtection : Protection
     {
-        public const string _Id = "反虚拟机保护";
+        public const string _Id = "anti vm";
         public const string _FullId = "Ki.AntiVM";
 
         public override string Name
         {
-            get { return "反虚拟机保护（Anti Virtual Machine）"; }
+            get { return "Anti Virtual Machine"; }
         }
 
         public override string Description
         {
-            get { return "此保护可防止程序集在虚拟机上运行。"; }
+            get { return "Prevents the assembly from running in a virtual machine."; }
         }
 
         public override string Id
@@ -38,7 +38,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.正常保护; }
+            get { return ProtectionPreset.Normal; }
         }
 
         protected override void Initialize(ConfuserContext context)

@@ -14,7 +14,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "常数突变保护（Mutate Constants）";
+                return "Mutate Constants";
             }
         }
 
@@ -22,7 +22,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "此保护会把常数用sizeof替换。";
+                return "Replaces constants with sizeof expressions.";
             }
         }
 
@@ -30,7 +30,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "常数突变保护";
+                return "mutate constants";
             }
         }
 
@@ -50,7 +50,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return ProtectionPreset.正常保护;
+                return ProtectionPreset.Normal;
             }
         }
 

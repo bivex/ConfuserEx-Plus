@@ -6,18 +6,18 @@ namespace Confuser.Protections
     [BeforeProtection("Ki.ControlFlow"), AfterProtection("Ki.Constants")]
     internal class ResourceProtection : Protection
     {
-        public const string _Id = "资源保护";
+        public const string _Id = "resources";
         public const string _FullId = "Ki.Resources";
         public const string _ServiceId = "Ki.Resources";
 
         public override string Name
         {
-            get { return "资源保护（Resources）"; }
+            get { return "Resources"; }
         }
 
         public override string Description
         {
-            get { return "此保护对嵌入的资源进行编码和压缩。"; }
+            get { return "Encodes and compresses embedded resources."; }
         }
 
         public override string Id
@@ -32,7 +32,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.正常保护; }
+            get { return ProtectionPreset.Normal; }
         }
 
         protected override void Initialize(ConfuserContext context) { }

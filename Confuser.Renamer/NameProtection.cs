@@ -5,18 +5,18 @@ namespace Confuser.Renamer
 {
     internal class NameProtection : Protection
     {
-        public const string _Id = "命名保护";
+        public const string _Id = "rename";
         public const string _FullId = "Ki.Rename";
         public const string _ServiceId = "Ki.Rename";
 
         public override string Name
         {
-            get { return "命名保护（Name Protection）"; }
+            get { return "Name Protection"; }
         }
 
         public override string Description
         {
-            get { return "此保护混淆了名称，因此反编译的源代码既不能编译也不能阅读。"; }
+            get { return "Obfuscates names so decompiled source cannot compile or be read."; }
         }
 
         public override string Id
@@ -31,7 +31,7 @@ namespace Confuser.Renamer
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.基础保护; }
+            get { return ProtectionPreset.Basic; }
         }
 
         protected override void Initialize(ConfuserContext context)

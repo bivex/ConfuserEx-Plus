@@ -100,7 +100,7 @@ namespace ConfuserEx.ViewModel
             {
                 var sfd = new VistaSaveFileDialog();
                 sfd.FileName = FileName;
-                sfd.Filter = "ConfuserEx 工程 (*.crproj)|*.crproj|All Files (*.*)|*.*";
+                sfd.Filter = "ConfuserEx Project (*.crproj)|*.crproj|All Files (*.*)|*.*";
                 sfd.DefaultExt = ".crproj";
                 sfd.AddExtension = true;
                 if (!(sfd.ShowDialog(Application.Current.MainWindow) ?? false) || sfd.FileName == null)
@@ -118,7 +118,7 @@ namespace ConfuserEx.ViewModel
         {
             if (!Project.IsModified)
                 return true;
-            switch (MessageBox.Show("当前项目有未保存的更改，是否保存？", "ConfuserEx", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+            switch (MessageBox.Show("Current project has unsaved changes. Save?", "ConfuserEx", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
             {
                 case MessageBoxResult.Yes:
                     return SaveProj();
@@ -145,7 +145,7 @@ namespace ConfuserEx.ViewModel
                 return;
 
             var ofd = new VistaOpenFileDialog();
-            ofd.Filter = "ConfuserEx 工程 (*.crproj)|*.crproj|All Files (*.*)|*.*";
+            ofd.Filter = "ConfuserEx Project (*.crproj)|*.crproj|All Files (*.*)|*.*";
             if ((ofd.ShowDialog(Application.Current.MainWindow) ?? false) && ofd.FileName != null)
             {
                 string fileName = ofd.FileName;
@@ -160,7 +160,7 @@ namespace ConfuserEx.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("无效的项目!", "ConfuserEx", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Invalid project!", "ConfuserEx", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

@@ -64,14 +64,14 @@ namespace Confuser.Core
             {
                 var rule = new Rule
                 {
-                    Preset = ProtectionPreset.无保护,
+                    Preset = ProtectionPreset.None,
                     Inherit = true,
                     Pattern = "true"
                 };
                 rule.Add(new SettingItem<Protection>
                 {
                     Id = prot.Id,
-                    Action = SettingItemAction.添加
+                    Action = SettingItemAction.Add
                 });
                 proj.Rules.Add(rule);
                 discovery = new PackerDiscovery(prot);

@@ -13,7 +13,7 @@ namespace ConfuserEx.ViewModel
     public class ProjectTabVM : TabViewModel
     {
         public ProjectTabVM(AppVM app)
-            : base(app, "工程") { }
+            : base(app, "Project") { }
 
         public ICommand DragDrop
         {
@@ -74,7 +74,7 @@ namespace ConfuserEx.ViewModel
                 return new RelayCommand(() =>
                 {
                     var ofd = new VistaOpenFileDialog();
-                    ofd.Filter = ".NET 程序集 (*.exe, *.dll)|*.exe;*.dll|All Files (*.*)|*.*";
+                    ofd.Filter = ".NET Assembly (*.exe, *.dll)|*.exe;*.dll|All Files (*.*)|*.*";
                     ofd.Multiselect = true;
                     if (ofd.ShowDialog() ?? false)
                     {

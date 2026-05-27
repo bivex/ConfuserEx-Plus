@@ -11,17 +11,17 @@ namespace Confuser.Protections
 {
     internal class InvalidMetadataProtection : Protection
     {
-        public const string _Id = "无效元数据保护";
+        public const string _Id = "invalid metadata";
         public const string _FullId = "Ki.InvalidMD";
 
         public override string Name
         {
-            get { return "无效元数据保护（Invalid Metadata）"; }
+            get { return "Invalid Metadata"; }
         }
 
         public override string Description
         {
-            get { return "此保护将无效的元数据添加到模块中，以防止反汇编程序/反编译器打开它们。"; }
+            get { return "Adds invalid metadata to prevent disassemblers/decompilers from opening the module."; }
         }
 
         public override string Id
@@ -36,7 +36,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.无保护; }
+            get { return ProtectionPreset.None; }
         }
 
         protected override void Initialize(ConfuserContext context)

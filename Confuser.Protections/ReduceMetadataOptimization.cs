@@ -11,7 +11,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "优化元数据（Reduce Metadata Confusion）";
+                return "Reduce Metadata";
             }
         }
 
@@ -19,7 +19,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "此优化将删除不必要的元数据。";
+                return "Removes unnecessary metadata.";
             }
         }
 
@@ -27,7 +27,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return "优化元数据";
+                return "reduce metadata";
             }
         }
 
@@ -43,7 +43,7 @@ namespace Confuser.Protections
         {
             get
             {
-                return ProtectionPreset.最强保护;
+                return ProtectionPreset.Maximum;
             }
         }
 

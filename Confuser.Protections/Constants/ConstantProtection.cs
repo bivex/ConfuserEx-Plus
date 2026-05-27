@@ -12,19 +12,19 @@ namespace Confuser.Protections
     [BeforeProtection("Ki.ControlFlow"), AfterProtection("Ki.RefProxy")]
     internal class ConstantProtection : Protection, IConstantService
     {
-        public const string _Id = "常量保护";
+        public const string _Id = "constants";
         public const string _FullId = "Ki.Constants";
         public const string _ServiceId = "Ki.Constants";
         internal static readonly object ContextKey = new object();
 
         public override string Name
         {
-            get { return "常量保护（Constants）"; }
+            get { return "Constants"; }
         }
 
         public override string Description
         {
-            get { return "此保护对代码中的常量进行编码和压缩."; }
+            get { return "Encodes and compresses constants in the code."; }
         }
 
         public override string Id
@@ -39,7 +39,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.正常保护; }
+            get { return ProtectionPreset.Normal; }
         }
 
         public void ExcludeMethod(ConfuserContext context, MethodDef method)

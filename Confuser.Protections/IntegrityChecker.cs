@@ -16,17 +16,17 @@ namespace Confuser.Protections
     [BeforeProtection("Ki.AntiTamper")]
     internal class IntegrityChecker : Protection
     {
-        public const string _Id = "完整性验证保护";
+        public const string _Id = "integrity";
         public const string _FullId = "Ki.Integrity";
 
         public override string Name
         {
-            get { return "完整性验证保护（Integrity）"; }
+            get { return "Integrity"; }
         }
 
         public override string Description
         {
-            get { return "此保护通过比对模块HASH值以防止文件修改。"; }
+            get { return "Prevents file modification by comparing module hash values."; }
         }
 
         public override string Id
@@ -41,7 +41,7 @@ namespace Confuser.Protections
 
         public override ProtectionPreset Preset
         {
-            get { return ProtectionPreset.无保护; }
+            get { return ProtectionPreset.None; }
         }
 
         protected override void Initialize(ConfuserContext context)

@@ -57,7 +57,7 @@ namespace ConfuserEx
             }
             catch
             {
-                MessageBox.Show("无效的项目!", "ConfuserEx", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Invalid project!", "ConfuserEx", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

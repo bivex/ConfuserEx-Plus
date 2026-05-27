@@ -6,11 +6,11 @@ namespace Confuser.Protections
 {
     public class AntiWatermarkProtection : Protection
     {
-        public override string Name => "反水印保护（Anti Watermark）";
-        public override string Description => "此保护去除ProtectedBy水印，使查壳工具无法识别。";
-        public override string Id => "反水印保护";
+        public override string Name => "Anti Watermark";
+        public override string Description => "Removes the ProtectedBy watermark to avoid detection.";
+        public override string Id => "anti watermark";
         public override string FullId => "HoLLy.AntiWatermark";
-        public override ProtectionPreset Preset => ProtectionPreset.正常保护;
+        public override ProtectionPreset Preset => ProtectionPreset.Normal;
 
         protected override void Initialize(ConfuserContext context) { }
 
