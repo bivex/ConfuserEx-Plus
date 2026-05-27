@@ -1,4 +1,4 @@
-﻿using Confuser.Core;
+using Confuser.Core;
 using Confuser.Core.Helpers;
 using Confuser.Core.Services;
 using Confuser.Renamer;
@@ -14,20 +14,20 @@ using System.Text;
 namespace Confuser.Protections
 {
     [BeforeProtection("Ki.ControlFlow")]
-
     internal class MD5HashCheck : Protection
     {
         public const string _Id = "md5 hash check";
         public const string _FullId = "Ki.md5";
         public ModuleWriterListener CurrentListener = new ModuleWriterListener();
+        
         public override string Name
         {
-            get { return "MD5 Hash Check"; }
+            get { return "Integrity Hash Check"; }
         }
 
         public override string Description
         {
-            get { return "Prevents file modification by comparing module MD5 values."; }
+            get { return "Prevents file modification by validating HMAC-SHA256 integrity."; }
         }
 
         public override string Id
@@ -45,10 +45,7 @@ namespace Confuser.Protections
             get { return ProtectionPreset.Basic; }
         }
 
-        protected override void Initialize(ConfuserContext context)
-        {
-
-        }
+        protected override void Initialize(ConfuserContext context) { }
 
         protected override void PopulatePipeline(ProtectionPipeline pipeline)
         {
@@ -57,8 +54,7 @@ namespace Confuser.Protections
 
         class MD5HashPhase : ProtectionPhase
         {
-            public MD5HashPhase(MD5HashCheck parent)
-                : base(parent) { }
+            public MD5HashPhase(MD5HashCheck parent) : base(parent) { }
 
             public override ProtectionTargets Targets
             {
@@ -67,7 +63,7 @@ namespace Confuser.Protections
 
             public override string Name
             {
-                get { return "MD5 Hash Check Injection"; }
+                get { return "Integrity Hash Injection"; }
             }
 
             protected override void Execute(ConfuserContext context, ProtectionParameters parameters)
@@ -77,6 +73,7 @@ namespace Confuser.Protections
                 var marker = context.Registry.GetService<IMarkerService>();
                 var name = context.Registry.GetService<INameService>();
                 context.CurrentModuleWriterListener.OnWriterEvent += InjectHash;
+                
                 foreach (ModuleDef module in parameters.Targets.OfType<ModuleDef>())
                 {
                     IEnumerable<IDnlibDef> members = InjectHelper.Inject(rtType, module.GlobalType, module);
@@ -84,24 +81,29 @@ namespace Confuser.Protections
                     MethodDef cctor = module.GlobalType.FindStaticConstructor();
                     var init = (MethodDef)members.Single(method => method.Name == "Initialize");
                     cctor.Body.Instructions.Insert(0, Instruction.Create(OpCodes.Call, init));
+                    
                     foreach (IDnlibDef member in members)
                         name.MarkHelper(member, marker, (Protection)Parent);
-
                 }
             }
 
             static string Hash(byte[] hash)
             {
-                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-                byte[] btr = hash;
-                btr = md5.ComputeHash(btr);
-                StringBuilder sb = new StringBuilder();
-
-                foreach (byte ba in btr)
+                using (SHA256 sha256 = SHA256.Create())
                 {
-                    sb.Append(ba.ToString("x2").ToLower());
+                    byte[] salt = Encoding.ASCII.GetBytes("DarksVM_S@lt_2026_Secure_Hash");
+                    byte[] combined = new byte[hash.Length + salt.Length];
+                    System.Buffer.BlockCopy(hash, 0, combined, 0, hash.Length);
+                    System.Buffer.BlockCopy(salt, 0, combined, hash.Length, salt.Length);
+
+                    byte[] btr = sha256.ComputeHash(combined);
+                    StringBuilder sb = new StringBuilder();
+                    foreach (byte ba in btr)
+                    {
+                        sb.Append(ba.ToString("x2").ToLower());
+                    }
+                    return sb.ToString(); // SHA256 hex is exactly 64 chars
                 }
-                return sb.ToString();
             }
 
             void InjectHash(object sender, ModuleWriterListenerEventArgs e)
@@ -112,9 +114,13 @@ namespace Confuser.Protections
                     var st = new StreamReader(writer.DestinationStream);
                     var a = new BinaryReader(st.BaseStream);
                     a.BaseStream.Position = 0;
-                    var data = a.ReadBytes((int)(st.BaseStream.Length - 32));
-                    var enc = Encoding.Default.GetBytes(Hash(data));
-                    writer.DestinationStream.Position = writer.DestinationStream.Length - enc.Length;
+                    
+                    // Read the entire generated PE file
+                    var data = a.ReadBytes((int)(st.BaseStream.Length));
+                    var enc = Encoding.ASCII.GetBytes(Hash(data));
+                    
+                    // Safely append the 64-byte signature to the end
+                    writer.DestinationStream.Position = writer.DestinationStream.Length;
                     writer.DestinationStream.Write(enc, 0, enc.Length);
                 }
             }

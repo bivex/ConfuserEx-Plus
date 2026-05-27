@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
 
 namespace Confuser.Runtime
 {
@@ -10,48 +10,66 @@ namespace Confuser.Runtime
     {
         static void Initialize()
         {
-            var bas = new StreamReader(typeof(MD5).Assembly.Location).BaseStream;
-            var file = new BinaryReader(bas);
-            var file2 = File.ReadAllBytes(typeof(MD5).Assembly.Location);
-            byte[] byt = file.ReadBytes(file2.Length - 32);
-            var a = Hash(byt);
-            file.BaseStream.Position = file.BaseStream.Length - 32;
-            string b = Encoding.ASCII.GetString(file.ReadBytes(32));
-
-            if (a != b)
+            string loc = typeof(MD5).Assembly.Location;
+            
+            // Protect against in-memory loading (Assembly.Load(byte[])) bypass
+            if (string.IsNullOrEmpty(loc))
             {
-                CrossAppDomainSerializer("START CMD /C \"ECHO File corrupted! This application has been manipulated. && PAUSE\" ");
-                ProcessStartInfo Info = new ProcessStartInfo();
-                Info.WindowStyle = ProcessWindowStyle.Hidden;
-                Info.CreateNoWindow = true;
-                Info.Arguments = "/C choice /C Y /N /D Y /T 3 & Del " + Application.ExecutablePath;
-                Info.FileName = "cmd.exe";
-                Process.Start(Info);
+                Environment.FailFast("In-memory loading detected.");
                 Process.GetCurrentProcess().Kill();
+                return;
+            }
+
+            try 
+            {
+                using (var bas = new FileStream(loc, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var file = new BinaryReader(bas))
+                {
+                    if (bas.Length < 64) Fail();
+
+                    int originalLen = (int)bas.Length - 64;
+                    byte[] originalData = file.ReadBytes(originalLen);
+                    string computedHash = Hash(originalData);
+                    
+                    file.BaseStream.Position = originalLen;
+                    string embeddedHash = Encoding.ASCII.GetString(file.ReadBytes(64));
+
+                    if (computedHash != embeddedHash)
+                    {
+                        Fail();
+                    }
+                }
+            }
+            catch
+            {
+                Fail();
             }
         }
 
-        internal static void CrossAppDomainSerializer(string A_0)
+        static void Fail()
         {
-            Process.Start(new ProcessStartInfo("cmd.exe", "/c " + A_0)
-            {
-                CreateNoWindow = true,
-                UseShellExecute = false
-            });
+            Environment.FailFast("File corrupted! This application has been manipulated.");
+            Process.GetCurrentProcess().Kill();
         }
 
         static string Hash(byte[] hash)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] btr = hash;
-            btr = md5.ComputeHash(btr);
-            StringBuilder sb = new StringBuilder();
-
-            foreach (byte ba in btr)
+            using (SHA256 sha256 = SHA256.Create())
             {
-                sb.Append(ba.ToString("x2").ToLower());
+                byte[] salt = Encoding.ASCII.GetBytes("DarksVM_S@lt_2026_Secure_Hash");
+                byte[] combined = new byte[hash.Length + salt.Length];
+                Buffer.BlockCopy(hash, 0, combined, 0, hash.Length);
+                Buffer.BlockCopy(salt, 0, combined, hash.Length, salt.Length);
+
+                byte[] btr = sha256.ComputeHash(combined);
+                StringBuilder sb = new StringBuilder();
+
+                foreach (byte ba in btr)
+                {
+                    sb.Append(ba.ToString("x2").ToLower());
+                }
+                return sb.ToString();
             }
-            return sb.ToString();
         }
     }
 }
